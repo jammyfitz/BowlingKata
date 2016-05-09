@@ -7,22 +7,24 @@ namespace BowlingKata
     {
         public int TotalScore { get; set; }
         private int FrameNumber { get; set; }
-        private List<Frame> Frames { get; set; } 
+        private List<IFrame> Frames { get; set; } 
         private int TotalRolls { get; set; }
         private int ShotScore { get; set; }
-        private int PreviousScore { get; set; }
+
+        private readonly ScoreHelper ScoreHelper;
         public Game()
         {
             Frames = InitialiseFrames();
             FrameNumber = 1;
             TotalRolls = 1;
+            ScoreHelper = new ScoreHelper(Frames);
         }
 
         public void Roll(int shotScore)
         {
             SaveScore(shotScore);
 
-            if(EndOfFrame())
+            if(IsEndOfFrame())
             {
                 FrameNumber++;
             }
@@ -32,10 +34,12 @@ namespace BowlingKata
 
         public int Score()
         {
-            return Frames.Sum(x => x.FirstShot + x.SecondShot);
+            return ScoreHelper.GetTotalScore();
+
+            
         }
 
-        private bool EndOfFrame()
+        private bool IsEndOfFrame()
         {
             return Frames[FrameNumber - 1].EndOfFrame;
         }
@@ -45,39 +49,54 @@ namespace BowlingKata
             Frames[FrameNumber - 1].SaveScore(shotScore);
         }
 
-        private bool IsStrike()
-        {
-            if (ShotScore == 10)
-            {
-                return true;
-            }
 
-            return false;
-        }
-
-        private bool IsSpare()
+        private static List<IFrame> InitialiseFrames()
         {
-            if ((ShotScore + PreviousScore == 10) && ShotScore != 0 && PreviousScore != 0)
+            return new List<IFrame>(10)
             {
-                return true;
-            }
-
-            return false;
-        }
-        private static List<Frame> InitialiseFrames()
-        {
-            return new List<Frame>(10)
-            {
-                new Frame(),
-                new Frame(),
-                new Frame(),
-                new Frame(),
-                new Frame(),
-                new Frame(),
-                new Frame(),
-                new Frame(),
-                new Frame(),
                 new Frame()
+                {
+                    FirstShot = -1,
+                    SecondShot = -1
+                },
+                new Frame()  {
+                    FirstShot = -1,
+                    SecondShot = -1
+                },
+                new Frame()  {
+                    FirstShot = -1,
+                    SecondShot = -1
+                },
+                new Frame()  {
+                    FirstShot = -1,
+                    SecondShot = -1
+                },
+                new Frame()  {
+                    FirstShot = -1,
+                    SecondShot = -1
+                },
+                new Frame()  {
+                    FirstShot = -1,
+                    SecondShot = -1
+                },
+                new Frame()  {
+                    FirstShot = -1,
+                    SecondShot = -1
+                },
+                new Frame()  {
+                    FirstShot = -1,
+                    SecondShot = -1
+                },
+                new Frame()  {
+                    FirstShot = -1,
+                    SecondShot = -1
+                },
+                new TenthFrame()
+                {
+                    FirstShot = -1,
+                    SecondShot = -1,
+                    ThirdShot = -1
+                }
             };
         }
     }

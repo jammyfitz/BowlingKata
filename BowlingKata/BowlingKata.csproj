@@ -48,6 +48,8 @@
     <Compile Include="Game.cs" />
     <Compile Include="IFrame.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ScoreHelper.cs" />
+    <Compile Include="TenthFrame.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

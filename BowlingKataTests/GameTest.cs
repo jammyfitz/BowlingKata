@@ -37,8 +37,7 @@
         {
             Game game = new Game();
 
-
-            //Spare
+            // Spare
             game.Roll(5);
             game.Roll(5);
 
@@ -50,7 +49,46 @@
                 game.Roll(0);
             }
 
-            Assert.That(game.Score() == 16);
+            Assert.That(game.Score().Equals(16));
+        }
+
+        [Test]
+        public void AStrikeThenThreePinsThenFourPinsThenAllMissesScoresTwentyFour()
+        {
+            Game game = new Game();
+
+            // Strike
+            game.Roll(10);
+            game.Roll(0);
+
+            game.Roll(3);
+            game.Roll(4);
+
+            for (int i = 1; i <= 16; i++)
+            {
+                game.Roll(0);
+            }
+
+            Assert.That(game.Score().Equals(24));
+        }
+
+        [Test]
+        public void TwelveStrikesScoresThreeHundred()
+        {
+            Game game = new Game();
+
+            for (int i = 1; i <= 9; i++)
+            {
+                game.Roll(10);
+                game.Roll(0);
+            }
+
+            // Tenth Frame
+            game.Roll(10);
+            game.Roll(10);
+            game.Roll(10);
+
+            Assert.That(game.Score().Equals(300));
         }
 
     }
