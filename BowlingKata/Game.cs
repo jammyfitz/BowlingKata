@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
+using BowlingKata.Helpers;
+using BowlingKata.Models;
 
 namespace BowlingKata
 {
@@ -7,7 +8,7 @@ namespace BowlingKata
     {
         public int TotalScore { get; set; }
         private int FrameNumber { get; set; }
-        private List<IFrame> Frames { get; set; } 
+        private List<IFrame> Frames { get; } 
 
         private readonly ScoreHelper ScoreHelper;
         public Game()

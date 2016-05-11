@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace BowlingKata
+﻿namespace BowlingKata.Models
 {
     public class Frame : IFrame
     {

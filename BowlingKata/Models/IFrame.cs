@@ -1,4 +1,4 @@
-﻿namespace BowlingKata
+﻿namespace BowlingKata.Models
 {
     public interface IFrame
     {

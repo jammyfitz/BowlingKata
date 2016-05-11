@@ -1,12 +1,7 @@
-﻿using BowlingKata;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static BowlingKata.FrameExtensions;
+﻿using System.Collections.Generic;
+using BowlingKata.Models;
 
-namespace BowlingKata
+namespace BowlingKata.Helpers
 {
     public class ScoreHelper
     {
@@ -42,84 +37,60 @@ namespace BowlingKata
 
         private int GetStrikeBonusScore(int i)
         {
-            if (i <= 7) // First to Eighth Frames
+            if (NextTwoShotsAreStrikes(i))
             {
-                if (NextTwoFramesAreStrikes(i))
-                {
-                    return 20;
-                }
-
-                if (NextFrameIsStrike(i))
-                {
-                    return 10;
-                }
-
-                return NextFrameScore(i);
+                return 20;
             }
 
-            if (i == 8) // Ninth Frame
+            if (NextShotIsStrike(i))
             {
-                if (_frames[i + 1].FirstShot == 10 && _frames[i + 1].SecondShot == 10)
-                {
-                    return 20;
-                }
-
-                if (_frames[i + 1].FirstShot == 10)
-                {
-                    return 10;
-                }
-
-                return NextFrameScore(i);
+                return 10;
             }
 
-            if (i == 9) // Tenth Frame
-            {
-                var tenthFrame = (TenthFrame)_frames[i];
-                if (tenthFrame.SecondShot == 10 && tenthFrame.ThirdShot == 10)
-                {
-                    return 20;
-                }
-
-                if (tenthFrame.SecondShot == 10)
-                {
-                    return 10;
-                }
-
-                return tenthFrame.FirstShot + tenthFrame.SecondShot + tenthFrame.ThirdShot;
-            }
-
-            return -1;
+            return NextShotScore(i);
         }
 
         private bool NextTwoShotsAreStrikes(int i)
         {
-            if (i <= 7) // First to Eighth Frames
+            switch (i)
             {
-                return NextTwoFramesAreStrikes(i);
-            }
-            if (i == 8) // Ninth Frame
-            {
-                return IsDoubleInTenthFrame((TenthFrame)_frames[i + 1]);
-            }
-            if (i == 9) // Tenth Frame
-            {
-                
+                case 8:
+                    return IsDoubleStrikeInTenthFrame((TenthFrame)_frames[i + 1]);
+                case 9:
+                    return false;
+                default:
+                    return NextTwoFramesAreStrikes(i);
             }
         }
 
-        private bool IsDoubleInTenthFrame(TenthFrame tenthFrame)
+        private static bool IsDoubleStrikeInTenthFrame(TenthFrame tenthFrame)
         {
-            return (tenthFrame.SecondShot == 10 && tenthFrame.ThirdShot == 10);
+            return (tenthFrame.FirstShot == 10 && tenthFrame.SecondShot == 10);
         }
 
-        private int NextFrameScore(int i)
+        private int NextShotScore(int i)
         {
+            if (LastFrame(i))
+            {
+                return 0;
+            }
+
             return _frames[i + 1].FirstShot + _frames[i + 1].SecondShot;
         }
 
-        private bool NextFrameIsStrike(int i)
+        private static bool LastFrame(int i)
         {
-            return _frames[i + 1].IsStrike();
+            return i == 9;
+        }
+
+        private bool NextShotIsStrike(int i)
+        {
+            if (LastFrame(i))
+            {
+                return false;
+            }
+
+            return _frames[i + 1].FirstShot == 10;
         }
 
         private bool NextTwoFramesAreStrikes(int i)

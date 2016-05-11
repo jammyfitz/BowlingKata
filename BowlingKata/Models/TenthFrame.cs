@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BowlingKata
+﻿namespace BowlingKata.Models
 {
     public class TenthFrame : IFrame
     {
@@ -15,11 +9,6 @@ namespace BowlingKata
 
         public int GetScore()
         {
-            if (FirstShot == 10)
-            {
-                return FirstShot;
-            }
-
             if (FirstShot + SecondShot >= 10)
             {
                 return FirstShot + SecondShot + ThirdShot;

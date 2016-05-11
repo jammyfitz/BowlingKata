@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BowlingKata
+﻿namespace BowlingKata.Models
 {
     public static class FrameExtensions
     {
@@ -27,11 +21,5 @@ namespace BowlingKata
 
             return false;
         }
-
-        public static bool IsNormalFrame(this IFrame frame)
-        {
-                return frame is Frame;
-        }
-
     }
 }
