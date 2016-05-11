@@ -8,15 +8,12 @@ namespace BowlingKata
         public int TotalScore { get; set; }
         private int FrameNumber { get; set; }
         private List<IFrame> Frames { get; set; } 
-        private int TotalRolls { get; set; }
-        private int ShotScore { get; set; }
 
         private readonly ScoreHelper ScoreHelper;
         public Game()
         {
             Frames = InitialiseFrames();
             FrameNumber = 1;
-            TotalRolls = 1;
             ScoreHelper = new ScoreHelper(Frames);
         }
 
@@ -28,15 +25,11 @@ namespace BowlingKata
             {
                 FrameNumber++;
             }
-
-            TotalRolls++;
         }
 
         public int Score()
         {
             return ScoreHelper.GetTotalScore();
-
-            
         }
 
         private bool IsEndOfFrame()
@@ -48,7 +41,6 @@ namespace BowlingKata
         {
             Frames[FrameNumber - 1].SaveScore(shotScore);
         }
-
 
         private static List<IFrame> InitialiseFrames()
         {

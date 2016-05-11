@@ -59,7 +59,7 @@
 
             // Strike
             game.Roll(10);
-            game.Roll(0);
+            //game.Roll(0);
 
             game.Roll(3);
             game.Roll(4);
@@ -77,19 +77,12 @@
         {
             Game game = new Game();
 
-            for (int i = 1; i <= 9; i++)
+            for (int i = 1; i <= 12; i++)
             {
                 game.Roll(10);
-                game.Roll(0);
             }
-
-            // Tenth Frame
-            game.Roll(10);
-            game.Roll(10);
-            game.Roll(10);
 
             Assert.That(game.Score().Equals(300));
         }
-
     }
 }

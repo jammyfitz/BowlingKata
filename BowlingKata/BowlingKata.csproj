@@ -44,12 +44,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Frame.cs" />
+    <Compile Include="Models\Frame.cs" />
+    <Compile Include="Models\FrameExtensions.cs" />
     <Compile Include="Game.cs" />
-    <Compile Include="IFrame.cs" />
+    <Compile Include="Models\IFrame.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ScoreHelper.cs" />
-    <Compile Include="TenthFrame.cs" />
+    <Compile Include="Helpers\ScoreHelper.cs" />
+    <Compile Include="Models\TenthFrame.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
